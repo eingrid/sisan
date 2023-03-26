@@ -123,6 +123,7 @@ class GraphApp(tk.Tk):
             self.F3 = pd.read_csv('./Final_Pump_Norm/argF3_Norm.txt',header=None,sep='  ')
             self.F4 = pd.read_csv('./Final_Pump_Norm/argF4_Norm.txt',header=None,sep='  ')
             self.Func = pd.read_csv('./Final_Pump_Norm/Func_Norm.txt',header=None,sep='  ')
+            
         self.predict_random()
 
         # Set up initial values for graphs
@@ -146,7 +147,7 @@ class GraphApp(tk.Tk):
         self.draw_graph(self.graph4_canvas, self.graph4_x, self.graph4_values,self.graph4_values_pred,self.Y4)
 
         # Schedule function to update graphs every 200 miliseconds 
-        self.after(200, self.update_graphs, 1)
+        self.after(1, self.update_graphs, 1)
 
     def update_graphs(self, index):
         self.step += 1
@@ -180,10 +181,19 @@ class GraphApp(tk.Tk):
 
         # Schedule function to update graphs again in one second
         if (index + 1) % len(self.Func) != 0:
-            self.after(200, self.update_graphs, (index + 1) % len(self.Func))
+            self.after(1, self.update_graphs, (index + 1) % len(self.Func))
 
+    def check_risks(self, step):
+        value = self.Func_predicted.iloc[step,2]
+
+        if value > 100:
+            self.type_of_situation.config(text = f'RIZIK {value}')
+        else:
+            self.type_of_situation.config(text = 'OK')
+    
     def draw_graph(self, canvas, x_data, y_data,y_data_pred,Y_text):
         # Clear canvas
+        self.check_risks(self.step)
         canvas.delete("all")
 
         # Define the coordinates of the X-axis line
@@ -213,16 +223,18 @@ class GraphApp(tk.Tk):
             canvas.create_line(prev_x_point,prev_y_point,x_point,y_point,fill="green", width=2)
             prev_x_point = x_point
             prev_y_point = y_point
+
         #Draw predicted values
-        
         prev_x_point, prev_y_point = 0,y2
         for x_point,y_point in zip(x_data,y_data_pred):
             y_point = y2 - y_point
             canvas.create_line(prev_x_point,prev_y_point,x_point,y_point,fill="yellow", width=2)
             prev_x_point = x_point
             prev_y_point = y_point
+            
         text = Y_text['text'].split(':')[0]
         Y_text.config(text=f'{text}: {np.round(y_data_pred[-1],3)}')
+        
 if __name__ == "__main__":
     app = GraphApp()
     app.mainloop()
