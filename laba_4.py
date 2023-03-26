@@ -26,10 +26,10 @@ class GraphApp(tk.Tk):
         self.mode_label = tk.Label(self, text="Mode:")
         self.mode_radio_normal = tk.Radiobutton(self, text="Normal", variable=self.mode, value="Normal", command=self.update_mode)
         self.mode_radio_warning = tk.Radiobutton(self, text="Warning", variable=self.mode, value="Warning", command=self.update_mode)
-        self.graph1_label = tk.Label(self, text="Graph 1")
-        self.graph2_label = tk.Label(self, text="Graph 2")
-        self.graph3_label = tk.Label(self, text="Graph 3")
-        self.graph4_label = tk.Label(self, text="Graph 4")
+        self.graph1_label = tk.Label(self, text="Graph Y1")
+        self.graph2_label = tk.Label(self, text="Graph Y2")
+        self.graph3_label = tk.Label(self, text="Graph Y3")
+        self.graph4_label = tk.Label(self, text="Graph Y4")
         self.graph1_canvas = tk.Canvas(self, width=500, height=200, bg="white")
         self.graph2_canvas = tk.Canvas(self, width=500, height=200, bg="white")
         self.graph3_canvas = tk.Canvas(self, width=500, height=200, bg="white")
@@ -39,6 +39,17 @@ class GraphApp(tk.Tk):
         self.graph3_value_label = tk.Label(self, textvariable=self.graph3_value)
         self.graph4_value_label = tk.Label(self, textvariable=self.graph4_value)
 
+        #Main Data (tracking of Y1, Y2, Y3,Y4 values)
+        self.Y1 = tk.Label(self, text="Y1 current value :")
+        self.Y2 = tk.Label(self, text="Y2 current value :")
+        self.Y3 = tk.Label(self, text="Y3 current value :")
+        self.Y4 = tk.Label(self, text="Y4 current value :")
+
+        self.type_of_situation = tk.Label(self, text="Type of situation")
+        self.description_of_situation = tk.Label(self, text="Description of situation")
+        self.level_of_danger = tk.Label(self, text="Level of danger")
+        self.level = tk.Label(self, text="Type of situation")
+
         # Set up layout
         self.start_button.grid(row=0, column=0, padx=10, pady=10)
         self.mode_label.grid(row=1, column=0, padx=10, pady=10)
@@ -46,21 +57,30 @@ class GraphApp(tk.Tk):
         self.mode_radio_warning.grid(row=1, column=2, padx=10, pady=10)
         self.time_step.grid(row=2,column=0, padx=10, pady=10)
 
-        self.graph1_label.grid(row=3, column=0, padx=10, pady=10)
-        self.graph1_canvas.grid(row=4, column=0, padx=10, pady=10)
-        self.graph1_value_label.grid(row=5, column=0, padx=10, pady=10)
+        self.graph1_label.grid(row=3, column=2, padx=10, pady=10)
+        self.graph1_canvas.grid(row=4, column=2, padx=10, pady=10)
+        self.graph1_value_label.grid(row=5, column=2, padx=10, pady=10)
 
-        self.graph2_label.grid(row=3, column=1, padx=10, pady=10)
-        self.graph2_canvas.grid(row=4, column=1, padx=10, pady=10)
-        self.graph2_value_label.grid(row=5, column=1, padx=10, pady=10)
+        self.graph2_label.grid(row=3, column=3, padx=10, pady=10)
+        self.graph2_canvas.grid(row=4, column=3, padx=10, pady=10)
+        self.graph2_value_label.grid(row=5, column=3, padx=10, pady=10)
 
-        self.graph3_label.grid(row=6, column=0, padx=10, pady=10)
-        self.graph3_canvas.grid(row=7, column=0, padx=10, pady=10)
-        self.graph3_value_label.grid(row=8, column=0, padx=10, pady=10)
+        self.graph3_label.grid(row=6, column=2, padx=10, pady=10)
+        self.graph3_canvas.grid(row=7, column=2, padx=10, pady=10)
+        self.graph3_value_label.grid(row=8, column=2, padx=10, pady=10)
 
-        self.graph4_label.grid(row=6, column=1, padx=10, pady=10)
-        self.graph4_canvas.grid(row=7, column=1, padx=10, pady=10)
-        self.graph4_value_label.grid(row=8, column=1, padx=10, pady=10)
+        self.graph4_label.grid(row=6, column=3, padx=10, pady=10)
+        self.graph4_canvas.grid(row=7, column=3, padx=10, pady=10)
+        self.graph4_value_label.grid(row=8, column=3, padx=10, pady=10)
+
+        self.type_of_situation.grid(row=3, column=0, padx=10, pady=10)        
+        self.description_of_situation.grid(row=4, column=0, padx=10, pady=10)        
+        self.level_of_danger.grid(row=5, column=0, padx=10, pady=10)        
+        self.level.grid(row=6, column=0, padx=10, pady=10)   
+        self.Y1.grid(row=3, column=1, padx=10, pady=10)
+        self.Y2.grid(row=4, column=1, padx=10, pady=10)
+        self.Y3.grid(row=5, column=1, padx=10, pady=10)
+        self.Y4.grid(row=6, column=1, padx=10, pady=10)
 
     def update_mode(self):
         pass
@@ -77,6 +97,15 @@ class GraphApp(tk.Tk):
     def reset_ui(self):
         self.time_step = tk.Label(self,text="Time step 0")
         self.step = 0
+        self.Y1 = tk.Label(self, text="Y1 current value :")
+        self.Y2 = tk.Label(self, text="Y2 current value :")
+        self.Y3 = tk.Label(self, text="Y3 current value :")
+        self.Y4 = tk.Label(self, text="Y4 current value :")
+        self.Y1.grid(row=3, column=1, padx=10, pady=10)
+        self.Y2.grid(row=4, column=1, padx=10, pady=10)
+        self.Y3.grid(row=5, column=1, padx=10, pady=10)
+        self.Y4.grid(row=6, column=1, padx=10, pady=10)
+        
         self.time_step.grid(row=2,column=0, padx=10, pady=10)
     def start(self):
         self.reset_ui()
@@ -111,10 +140,10 @@ class GraphApp(tk.Tk):
         self.graph3_values_pred = self.Func_predicted.iloc[0:1, 3].tolist()
         self.graph4_values_pred = self.Func_predicted.iloc[0:1, 4].tolist()
         # Draw initial graphs
-        self.draw_graph(self.graph1_canvas, self.graph1_x, self.graph1_values,self.graph1_values_pred)
-        self.draw_graph(self.graph2_canvas, self.graph2_x, self.graph2_values,self.graph2_values_pred)
-        self.draw_graph(self.graph3_canvas, self.graph3_x, self.graph3_values,self.graph3_values_pred)
-        self.draw_graph(self.graph4_canvas, self.graph4_x, self.graph4_values,self.graph4_values_pred)
+        self.draw_graph(self.graph1_canvas, self.graph1_x, self.graph1_values,self.graph1_values_pred,self.Y1)
+        self.draw_graph(self.graph2_canvas, self.graph2_x, self.graph2_values,self.graph2_values_pred,self.Y2)
+        self.draw_graph(self.graph3_canvas, self.graph3_x, self.graph3_values,self.graph3_values_pred,self.Y3)
+        self.draw_graph(self.graph4_canvas, self.graph4_x, self.graph4_values,self.graph4_values_pred,self.Y4)
 
         # Schedule function to update graphs every 200 miliseconds 
         self.after(200, self.update_graphs, 1)
@@ -122,6 +151,7 @@ class GraphApp(tk.Tk):
     def update_graphs(self, index):
         self.step += 1
         self.time_step.config( text = f' Time step = {self.step}')
+
         
         # Get next row of data
         row = self.Func.iloc[index:index+1]
@@ -143,16 +173,16 @@ class GraphApp(tk.Tk):
         self.graph4_values_pred.append(row_pred.iloc[0, 4])
 
         # Redraw graphs
-        self.draw_graph(self.graph1_canvas, self.graph1_x, self.graph1_values,self.graph1_values_pred)
-        self.draw_graph(self.graph2_canvas, self.graph2_x, self.graph2_values,self.graph2_values_pred)
-        self.draw_graph(self.graph3_canvas, self.graph3_x, self.graph3_values,self.graph3_values_pred)
-        self.draw_graph(self.graph4_canvas, self.graph4_x, self.graph4_values,self.graph4_values_pred)
+        self.draw_graph(self.graph1_canvas, self.graph1_x, self.graph1_values,self.graph1_values_pred,self.Y1)
+        self.draw_graph(self.graph2_canvas, self.graph2_x, self.graph2_values,self.graph2_values_pred,self.Y2)
+        self.draw_graph(self.graph3_canvas, self.graph3_x, self.graph3_values,self.graph3_values_pred,self.Y3)
+        self.draw_graph(self.graph4_canvas, self.graph4_x, self.graph4_values,self.graph4_values_pred,self.Y4)
 
         # Schedule function to update graphs again in one second
         if (index + 1) % len(self.Func) != 0:
-            self.after(10, self.update_graphs, (index + 1) % len(self.Func))
+            self.after(200, self.update_graphs, (index + 1) % len(self.Func))
 
-    def draw_graph(self, canvas, x_data, y_data,y_data_pred):
+    def draw_graph(self, canvas, x_data, y_data,y_data_pred,Y_text):
         # Clear canvas
         canvas.delete("all")
 
@@ -191,7 +221,8 @@ class GraphApp(tk.Tk):
             canvas.create_line(prev_x_point,prev_y_point,x_point,y_point,fill="yellow", width=2)
             prev_x_point = x_point
             prev_y_point = y_point
-        
+        text = Y_text['text'].split(':')[0]
+        Y_text.config(text=f'{text}: {np.round(y_data_pred[-1],3)}')
 if __name__ == "__main__":
     app = GraphApp()
     app.mainloop()
