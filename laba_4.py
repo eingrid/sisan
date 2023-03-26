@@ -34,10 +34,7 @@ class GraphApp(tk.Tk):
         self.graph2_canvas = tk.Canvas(self, width=500, height=200, bg="white")
         self.graph3_canvas = tk.Canvas(self, width=500, height=200, bg="white")
         self.graph4_canvas = tk.Canvas(self, width=500, height=200, bg="white")
-        self.graph1_value_label = tk.Label(self, textvariable=self.graph1_value)
-        self.graph2_value_label = tk.Label(self, textvariable=self.graph2_value)
-        self.graph3_value_label = tk.Label(self, textvariable=self.graph3_value)
-        self.graph4_value_label = tk.Label(self, textvariable=self.graph4_value)
+
 
         #Main Data (tracking of Y1, Y2, Y3,Y4 values)
         self.Y1 = tk.Label(self, text="Y1 current value :")
@@ -59,19 +56,15 @@ class GraphApp(tk.Tk):
 
         self.graph1_label.grid(row=3, column=2, padx=10, pady=10)
         self.graph1_canvas.grid(row=4, column=2, padx=10, pady=10)
-        self.graph1_value_label.grid(row=5, column=2, padx=10, pady=10)
 
         self.graph2_label.grid(row=3, column=3, padx=10, pady=10)
         self.graph2_canvas.grid(row=4, column=3, padx=10, pady=10)
-        self.graph2_value_label.grid(row=5, column=3, padx=10, pady=10)
 
         self.graph3_label.grid(row=6, column=2, padx=10, pady=10)
         self.graph3_canvas.grid(row=7, column=2, padx=10, pady=10)
-        self.graph3_value_label.grid(row=8, column=2, padx=10, pady=10)
 
         self.graph4_label.grid(row=6, column=3, padx=10, pady=10)
         self.graph4_canvas.grid(row=7, column=3, padx=10, pady=10)
-        self.graph4_value_label.grid(row=8, column=3, padx=10, pady=10)
 
         self.type_of_situation.grid(row=3, column=0, padx=10, pady=10)        
         self.description_of_situation.grid(row=4, column=0, padx=10, pady=10)        
